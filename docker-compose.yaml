@@ -1,0 +1,51 @@
+
+
+version: "2"
+services:
+
+
+  banking:
+    build: .
+    stdin_open: true
+    container_name: banking
+    links:
+      - db
+    networks:
+      - mysqlnet
+    volumes:
+      - bankingdata:/var/www/html
+
+  db:
+    image: mysql:8.0.19
+    container_name: mysql_test
+    command: '--default-authentication-plugin=mysql_native_password'
+    ports:
+      - "32000:3306"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Mi4man11
+      MYSQL_DATABASE: banking
+    networks:
+      - mysqlnet
+    volumes:
+      - ./conf/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+
+
+networks:
+  mysqlnet:
+    driver: bridge
+
+volumes:
+  bankingdbdata:
+  bankingdata:
+
+
+
+
+
+
+
+
+
+
+
