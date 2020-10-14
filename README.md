@@ -10,7 +10,7 @@ On macOS, you can install the git using Homebrew using ```brew install git```
 
 **Step 2:** Clone the project into your local machine using below command.
 
-```git clone https://github.com/Swapnay/banking-system.git```
+```https://github.com/Swapnay/banking.git``
 
 ### Prerequisites
 
@@ -25,7 +25,7 @@ Make sure you have Docker installed. Please follow the below link for official d
 **Step 1:** Change to the directory where the project was cloned in previous step.
 
 ```
-cd banking-system
+cd banking
 ```
 
 **Step 2:** Make sure Docker is up and running. You can start the docker engine from desktop icon on Mac.
@@ -33,7 +33,10 @@ cd banking-system
 **Step 3:** Run
 
 ```
-docker-compose up --build
+docker-compose up --build -d
+docker exec -it banking /bin/bash
+cd app
+python bank.py
 ```
 
 **Step 4:** Verify DB is up and running and tables are created
@@ -41,16 +44,6 @@ docker-compose up --build
 Use any of the database clients like MySQL workbench or SQLDeveloper. In my case, I am using the Pycharm DB plugin. Make sure you have the driver installed for the MySQL db running on the client you are using.
 
 Connect to MySQL database using the properties specified in ```docker-compose.yml``` file with host as ```localhost```.
-
-**Note:** 
-
-1. Don't use the ```MYSQL_ROOT_PASSWORD``` but the password for the db you created, i.e ```MYSQL_PASSWORD```
-
-2. The port to be used is ```32000``` which is the port on which app is running on localhost. Don't use ```3306``` as port to connect from the client as it's the port where container is running.
-
-Once connected, run simple commands like ```show tables``` or ```desc <<tablename>>``` to make sure table is created with exact fields specified in the Flask models.
-
-## Running the tests
 
 ## Deployment
 
@@ -60,7 +53,7 @@ Once connected, run simple commands like ```show tables``` or ```desc <<tablenam
 * [Python](https://rometools.github.io/rome/) - programming language
 * [pip](https://rometools.github.io/rome/) - Package and dependency manager
 * [MySQL](https://rometools.github.io/rome/) - Database
-* [Sqlalchemy](Databasehttps://www.sqlalchemy.org/download.html) Python ORM
+* [Sqlalchemy](https://www.sqlalchemy.org/download.html) Python ORM
 
 ## Contributing
 
