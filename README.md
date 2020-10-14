@@ -10,7 +10,7 @@ On macOS, you can install the git using Homebrew using ```brew install git```
 
 **Step 2:** Clone the project into your local machine using below command.
 
-```https://github.com/Swapnay/banking.git``
+```https://github.com/Swapnay/banking.git```
 
 ### Prerequisites
 
