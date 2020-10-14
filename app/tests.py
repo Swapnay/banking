@@ -1,5 +1,7 @@
-from app.dao.db import CustomerDao
-from .banking.customerprofile import Customer, Checking, Savings
+from app.dao.customerdao import CustomerDao
+from app.banking.customer import Customer
+from app.banking.checking import Checking
+from app.banking.savings import Savings
 import unittest
 from datetime import datetime
 from parameterized import parameterized
@@ -8,9 +10,10 @@ import logging
 
 class TestSuite(unittest.TestCase):
     logger = logging.getLogger('models.global_config')
-    customer1 = Customer("test_name", "test_last", "test@test.com", "333-444-5678", "444-555-6789", "1234 Lake Lane , Sunnyvale CA", "testuser", "Mi4man11", datetime.now(), datetime.now())
-    savings = Savings(2300, 0, 0, 2300, 12345, 23456, 2, 50, datetime.now())
-    checking = Checking(400, 0, 0, 300, 34567, 56789, 30, datetime.now())
+    customer1 = Customer("test_name","test_last", "test@test.com", "333-444-5678",
+                         "444-555-6789", "1234 Lake Lane ,Sunnyvale CA", "testuser", "Mi4man11", datetime.now(), datetime.now(), 1)
+    savings = Savings(2300, 0, 0, 2300, 12345, 23456, 2, 50, datetime.now(),1,1)
+    checking = Checking(400, 0, 0, 300, 34567, 56789, 30,2, datetime.now(),1,1)
 
     @parameterized.expand([
         (customer1, savings, checking, True),
