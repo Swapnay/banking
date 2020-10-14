@@ -12,8 +12,9 @@ services:
       - db
     networks:
       - mysqlnet
+    tty: true
     volumes:
-      - bankingdata:/var/www/html
+      - .:/app
 
   db:
     image: mysql:8.0.19
@@ -35,9 +36,7 @@ networks:
   mysqlnet:
     driver: bridge
 
-volumes:
-  bankingdbdata:
-  bankingdata:
+
 
 
 

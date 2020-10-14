@@ -1,4 +1,4 @@
-from app.dao.db import DbManager
+from app.dao.db import CustomerDao
 from .banking.customerprofile import Customer, Checking, Savings
 import unittest
 from datetime import datetime
@@ -19,13 +19,13 @@ class TestSuite(unittest.TestCase):
     def test_create_customer(self, customer_data, savings_data, checking_data, expected):
         try:
 
-            DbManager.create_customer(self, customer_data)
-            customer_details = DbManager.get_user(self, customer_data.user_id, customer_data.password)
+            CustomerDao.create_customer(self, customer_data)
+            customer_details = CustomerDao.get_user(self, customer_data.user_id, customer_data.password)
             self.assertTrue(customer_data.user_id == customer_details.user_id)
             customer_details.accounts.append(savings_data)
             customer_details.accounts.append(checking_data)
-            DbManager.create_customer(self, customer_details)
-            customer_account_details = DbManager.get_user(self, customer_data.user_id, customer_data.password)
+            CustomerDao.create_customer(self, customer_details)
+            customer_account_details = CustomerDao.get_user(self, customer_data.user_id, customer_data.password)
             self.assertTrue(len(customer_account_details.accounts) == 2)
 
         except Exception as e:
@@ -35,7 +35,7 @@ class TestSuite(unittest.TestCase):
     @classmethod
     def tearDownClass(cls):
         try:
-            DbManager.delete_customer(cls,cls.customer1)
+            CustomerDao.delete_customer(cls, cls.customer1)
         except Exception as ex:
             print(ex)
             logging.error("unable to delete rows ", ex)

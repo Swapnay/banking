@@ -35,6 +35,11 @@ CREATE TABLE `account` (
   `over_draw_fee` float DEFAULT NULL,
   `interest_rate` float DEFAULT NULL,
   `created_time` datetime DEFAULT NULL,
+  `date_due` datetime DEFAULT NULL,
+  `current_balance_to_pay` float DEFAULT NULL,
+  `principal` float DEFAULT NULL,
+  `loan_balance` float DEFAULT NULL,
+  `term` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `customer_id` (`customer_id`),
   CONSTRAINT `account_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`) ON DELETE CASCADE
@@ -59,12 +64,12 @@ DROP TABLE IF EXISTS `customer`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `customer` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(255) DEFAULT NULL,
-  `last_name` varchar(255) DEFAULT NULL,
+  `first_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `home_phone` varchar(255) DEFAULT NULL,
   `cell_phone` varchar(255) DEFAULT NULL,
-  `address` varchar(255) DEFAULT NULL,
+  `address` varchar(255) NOT NULL,
   `user_id` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `created_time` datetime DEFAULT NULL,
@@ -96,12 +101,12 @@ DROP TABLE IF EXISTS `employee`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `employee` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(255) DEFAULT NULL,
-  `last_name` varchar(255) DEFAULT NULL,
+  `first_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `home_phone` varchar(255) DEFAULT NULL,
   `cell_phone` varchar(255) DEFAULT NULL,
-  `address` varchar(255) DEFAULT NULL,
+  `address` varchar(255) NOT NULL,
   `user_id` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `created_time` datetime DEFAULT NULL,
@@ -109,7 +114,7 @@ CREATE TABLE `employee` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -118,7 +123,6 @@ CREATE TABLE `employee` (
 
 LOCK TABLES `employee` WRITE;
 /*!40000 ALTER TABLE `employee` DISABLE KEYS */;
-INSERT INTO `employee` VALUES (1,'John','doe','john@gmail.com','444-555-5678','408-555-6789','123, lake lane, sunnyvale, CA USA','admin','password','2020-10-11 22:45:09','2020-10-11 22:45:09');
 /*!40000 ALTER TABLE `employee` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -165,6 +169,8 @@ UNLOCK TABLES;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+
 
 INSERT INTO `employee` (`first_name`, `last_name`, `email`, `home_phone`, `cell_phone`, `address`, `user_id`, `password`, `created_time`,`updated_time`) VALUES
 ('John', 'doe', 'john@gmail.com', '444-555-5678', '408-555-6789', '123, lake lane, sunnyvale, CA USA', 'admin', 'password', NOW() , NOW() )
