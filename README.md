@@ -38,12 +38,14 @@ docker exec -it banking /bin/bash
 cd app
 python bank.py
 ```
+Use employee details from ```bnking/conf/docker-entrypoint-initdb.d/dbinit.sql``` to login to employee workflow.
 
 **Step 4:** Verify DB is up and running and tables are created
 
 Use any of the database clients like MySQL workbench or SQLDeveloper. In my case, I am using the Pycharm DB plugin. Make sure you have the driver installed for the MySQL db running on the client you are using.
 
-Connect to MySQL database using the properties specified in ```docker-compose.yml``` file with host as ```localhost```.
+Connect to MySQL database using the properties specified in ```docker-compose.yml``` file with host as ```mysql_test```.
+
 
 ## Deployment
 
